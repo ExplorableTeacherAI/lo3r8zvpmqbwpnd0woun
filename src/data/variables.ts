@@ -1,12 +1,12 @@
 /**
  * Variables Configuration
  * =======================
- * 
+ *
  * CENTRAL PLACE TO DEFINE ALL SHARED VARIABLES
- * 
+ *
  * This file defines all variables that can be shared across sections.
  * AI agents should read this file to understand what variables are available.
- * 
+ *
  * USAGE:
  * 1. Define variables here with their default values and metadata
  * 2. Use them in any section with: const x = useVar('variableName', defaultValue)
@@ -53,108 +53,141 @@ export interface VariableDefinition {
 
 /**
  * =====================================================
- * 🎯 DEFINE YOUR VARIABLES HERE
+ * 🎯 CIRCLES AND PI LESSON VARIABLES
  * =====================================================
- * 
- * SUPPORTED TYPES:
- * 
- * 1. NUMBER (slider):
- *    { defaultValue: 5, type: 'number', min: 0, max: 10, step: 1 }
- * 
- * 2. TEXT (free text):
- *    { defaultValue: 'Hello', type: 'text', placeholder: 'Enter text...' }
- * 
- * 3. SELECT (dropdown):
- *    { defaultValue: 'sine', type: 'select', options: ['sine', 'cosine', 'tangent'] }
- * 
- * 4. BOOLEAN (toggle):
- *    { defaultValue: true, type: 'boolean' }
- * 
- * 5. ARRAY (list of numbers):
- *    { defaultValue: [1, 2, 3], type: 'array' }
- * 
- * 6. OBJECT (complex data):
- *    { defaultValue: { x: 5, y: 10 }, type: 'object', schema: '{ x: number, y: number }' }
  */
 export const variableDefinitions: Record<string, VariableDefinition> = {
-    // ========================================
-    // ADD YOUR VARIABLES HERE
-    // ========================================
-
-    // Uncomment and modify these examples for your lesson:
-
-    /*
     // ─────────────────────────────────────────
-    // NUMBER - Use with sliders
+    // CIRCLE EXPLORATION - Interactive Radius
     // ─────────────────────────────────────────
-    myValue: {
-        defaultValue: 5,
+    circleRadius: {
+        defaultValue: 2,
         type: 'number',
-        label: 'My Value',
-        description: 'A number that controls something',
-        unit: 'm',           // optional unit display
+        label: 'Circle Radius',
+        description: 'The radius of the circle being explored',
+        min: 0.5,
+        max: 4,
+        step: 0.1,
+        color: '#ef4444',
+    },
+
+    // ─────────────────────────────────────────
+    // DIAMETER - Derived from radius
+    // ─────────────────────────────────────────
+    circleDiameter: {
+        defaultValue: 4,
+        type: 'number',
+        label: 'Circle Diameter',
+        description: 'The diameter of the circle (2 × radius)',
+        min: 1,
+        max: 8,
+        step: 0.2,
+        color: '#3b82f6',
+    },
+
+    // ─────────────────────────────────────────
+    // CIRCUMFERENCE - Calculated value
+    // ─────────────────────────────────────────
+    circleCircumference: {
+        defaultValue: 12.57,
+        type: 'number',
+        label: 'Circumference',
+        description: 'The circumference of the circle (π × diameter)',
         min: 0,
-        max: 10,
-        step: 0.5,
+        max: 30,
+        step: 0.01,
+        color: '#22c55e',
     },
 
     // ─────────────────────────────────────────
-    // TEXT - Free text input
+    // PI RATIO - The discovered constant
     // ─────────────────────────────────────────
-    lessonTitle: {
-        defaultValue: 'My Lesson',
+    piRatio: {
+        defaultValue: 3.14159,
+        type: 'number',
+        label: 'Pi Ratio',
+        description: 'Circumference ÷ Diameter = π',
+        min: 0,
+        max: 5,
+        step: 0.00001,
+        color: '#8b5cf6',
+    },
+
+    // ─────────────────────────────────────────
+    // LINKED HIGHLIGHTS
+    // ─────────────────────────────────────────
+    circleHighlight: {
+        defaultValue: '',
+        type: 'linkedHighlight',
+        label: 'Circle Highlight',
+        description: 'Active highlight for circle parts',
+        color: '#3b82f6',
+    },
+
+    // ─────────────────────────────────────────
+    // SPOT COLORS for prose-to-visual linking
+    // ─────────────────────────────────────────
+    spotRadius: {
+        defaultValue: 'radius',
+        type: 'spotColor',
+        label: 'Radius Color',
+        description: 'Color for radius in prose and visuals',
+        color: '#ef4444',
+    },
+    spotDiameter: {
+        defaultValue: 'diameter',
+        type: 'spotColor',
+        label: 'Diameter Color',
+        description: 'Color for diameter in prose and visuals',
+        color: '#3b82f6',
+    },
+    spotCircumference: {
+        defaultValue: 'circumference',
+        type: 'spotColor',
+        label: 'Circumference Color',
+        description: 'Color for circumference in prose and visuals',
+        color: '#22c55e',
+    },
+    spotPi: {
+        defaultValue: 'pi',
+        type: 'spotColor',
+        label: 'Pi Color',
+        description: 'Color for pi in prose and visuals',
+        color: '#8b5cf6',
+    },
+
+    // ─────────────────────────────────────────
+    // ASSESSMENT QUESTIONS
+    // ─────────────────────────────────────────
+    answerDiameterRelation: {
+        defaultValue: '',
         type: 'text',
-        label: 'Lesson Title',
-        description: 'The title of your lesson',
-        placeholder: 'Enter a title...',
+        label: 'Diameter Relation Answer',
+        description: 'How many times does the radius fit in the diameter?',
+        placeholder: '?',
+        correctAnswer: '2',
+        color: '#3b82f6',
     },
-
-    // ─────────────────────────────────────────
-    // SELECT - Dropdown with options
-    // ─────────────────────────────────────────
-    difficulty: {
-        defaultValue: 'medium',
+    answerPiApprox: {
+        defaultValue: '',
         type: 'select',
-        label: 'Difficulty',
-        description: 'The difficulty level of the lesson',
-        options: ['easy', 'medium', 'hard', 'expert'],
+        label: 'Pi Approximation Answer',
+        description: 'What is Pi approximately equal to?',
+        placeholder: '???',
+        correctAnswer: '3.14',
+        options: ['2.14', '3.14', '4.14', '1.14'],
+        color: '#8b5cf6',
     },
-
-    // ─────────────────────────────────────────
-    // BOOLEAN - Toggle switch
-    // ─────────────────────────────────────────
-    showHints: {
-        defaultValue: true,
-        type: 'boolean',
-        label: 'Show Hints',
-        description: 'Toggle to show or hide hints',
+    answerCircumferenceFormula: {
+        defaultValue: '',
+        type: 'select',
+        label: 'Circumference Formula Answer',
+        description: 'The formula for circumference',
+        placeholder: '???',
+        correctAnswer: 'π × d',
+        options: ['π + d', 'π × d', 'π ÷ d', 'd ÷ π'],
+        color: '#22c55e',
     },
-
-    // ─────────────────────────────────────────
-    // ARRAY - List of numbers
-    // ─────────────────────────────────────────
-    dataPoints: {
-        defaultValue: [1, 4, 9, 16, 25],
-        type: 'array',
-        label: 'Data Points',
-        description: 'Y-values for plotting a graph',
-    },
-
-    // ─────────────────────────────────────────
-    // OBJECT - Complex structured data
-    // ─────────────────────────────────────────
-    graphSettings: {
-        defaultValue: { 
-            xMin: -10, 
-            xMax: 10, 
-            showGrid: true 
-        },
-        type: 'object',
-        label: 'Graph Settings',
-        description: 'Configuration for the graph display',
-        schema: '{ xMin: number, xMax: number, showGrid: boolean }',
-    },
-    */
 };
 
 /**
